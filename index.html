@@ -43,6 +43,18 @@
             button.style.left = `${x}px`;
             button.style.top = `${y}px`;
         }
+        
+        function sendNotification() {
+            var botToken = "7843397599:AAHaeF-Ubq_gHsPhJX1E5nyyZtLc7jiSyRA"; // Замени на свой токен
+            var chatId = "395607796"; // Замени на свой chat_id
+            var message = "НЕТ";
+
+    // Прямая переадресация на API Telegram
+    var telegramURL = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
+
+    // Открываем запрос в новой вкладке (работает на iPhone/Android)
+    window.open(telegramURL, "_blank");
+}
     </script>
 </body> 
 </html>
