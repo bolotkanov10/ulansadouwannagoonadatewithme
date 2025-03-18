@@ -17,35 +17,40 @@
     </div>
 
     <script>
-        async function sendNotification() {
-    var botToken = "7843397599:AAHaeF-Ubq_gHsPhJX1E5nyyZtLc7jiSyRA"; 
-    var chatId = "395607796"; 
-    var message = "She said yes!";
+        async function sendNotification(response) {
+        var botToken = "7843397599:AAHaeF-Ubq_gHsPhJX1E5nyyZtLc7jiSyRA"; 
+        var chatId = "395607796"; 
+        var message = response === 'yes' 
+            ? "✅ Кто-то нажал 'YES' на приглашение!" 
+            : "❌ Кто-то нажал 'NO' на приглашение!";
 
-    try {
-        let response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                chat_id: chatId,
-                text: message
-            })
-        });
+        try {
+            let res = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ chat_id: chatId, text: message })
+            });
 
-        let data = await response.json();
-        if (data.ok) {
-            console.log("Уведомление отправлено!");
-            window.location.href = "yes.html"; // Перенаправление после успешной отправки
-        } else {
-            console.error("Ошибка Telegram API:", data);
+            let data = await res.json();
+            if (data.ok) {
+                console.log("Уведомление отправлено!");
+            } else {
+                console.error("Ошибка Telegram API:", data);
+            }
+        } catch (error) {
+            console.error("Ошибка:", error);
         }
-    } catch (error) {
-        console.error("Ошибка:", error);
+    }
+
+    function onYesClick() {
+        sendNotification('yes');
+        window.location.href = "yes.html"; 
+    }
+
+    function onNoClick() {
+        sendNotification('no');
     }
 }
-
 
         function moveButton() {
             var button = document.getElementById('noButton');
