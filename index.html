@@ -11,8 +11,8 @@
         </div>
         <div class="gif_container"></div>
         <div class="buttons">
-            <button class="btn" id="yesButton" onclick="onYesClick()">YES</button>
-            <button class="btn" id="noButton" onmouseover="shrinkAndMoveButton()" onclick="onNoClick()">NO</button>
+            <button class="btn" id="yesButton" onclick="sendNotification('yes'); setTimeout(() => { window.location.href = 'yes.html'; }, 500);">YES</button>
+<button class="btn" id="noButton" onclick="onNoClick()">NO</button>
         </div>
     </div>
 
@@ -21,8 +21,8 @@
         var botToken = "7843397599:AAHaeF-Ubq_gHsPhJX1E5nyyZtLc7jiSyRA"; 
         var chatId = "395607796"; 
         var message = response === 'yes' 
-            ? "She said YES!" 
-            : "Она не хочет";
+            ? "✅ Кто-то нажал 'YES' на приглашение!" 
+            : "❌ Кто-то нажал 'NO' на приглашение!";
 
         try {
             let res = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
@@ -42,23 +42,16 @@
         }
     }
 
-    function onYesClick() {
-        sendNotification('yes');
-        setTimeout(() => {
-            window.location.href = "yes.html"; 
-        }, 500);
-    }
-
-    function onNoClick() {
-        sendNotification('no');
-        shrinkAndMoveButton(); // После отправки уведомления кнопка уменьшится и сдвинется
+    async function onNoClick() {
+        await sendNotification('no'); // Ждем отправку уведомления перед перемещением
+        shrinkAndMoveButton();
     }
 
     function shrinkAndMoveButton() {
         var button = document.getElementById('noButton');
         var scale = parseFloat(button.dataset.scale) || 1; // Получаем текущий масштаб (по умолчанию 1)
         
-        if (scale > 0.2) { // Минимальный размер, чтобы кнопка совсем не исчезла
+        if (scale > 0.2) { // Минимальный размер, чтобы кнопка не исчезла полностью
             scale -= 0.2; 
             button.dataset.scale = scale;
             button.style.transform = `scale(${scale})`;
