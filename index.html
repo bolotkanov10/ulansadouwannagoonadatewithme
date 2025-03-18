@@ -12,7 +12,7 @@
         <div class="gif_container"></div>
         <div class="buttons">
             <button class="btn" id="yesButton" onclick="sendNotification('yes'); setTimeout(() => { window.location.href = 'yes.html'; }, 500);">YES</button>
-<button class="btn" id="noButton" onclick="onNoClick()">NO</button>
+<button class="btn" id="noButton" onmouseover="moveButton()" onclick="onNoClick()">NO</button>
         </div>
     </div>
 
@@ -46,7 +46,13 @@
         await sendNotification('no'); // Ждем отправку уведомления перед перемещением
         shrinkAndMoveButton();
     }
-
+        
+function moveButton() {
+                        var x = Math.random() * (window.innerWidth - document.getElementById('noButton').offsetWidth) - 85;
+                        var y = Math.random() * (window.innerHeight - document.getElementById('noButton').offsetHeight) - 48;
+                        document.getElementById('noButton').style.left = `${x}px`;
+                        document.getElementById('noButton').style.top = `${y}px`;
+                    }
     function shrinkAndMoveButton() {
         var button = document.getElementById('noButton');
         var scale = parseFloat(button.dataset.scale) || 1; // Получаем текущий масштаб (по умолчанию 1)
