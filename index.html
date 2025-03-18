@@ -1,8 +1,10 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="./styles.css">
-    <title>id like to ask u out on a date?</title>
+    <!-- Название сайта -->
+    <title>Ulanza's Date Game</title>
+
+    <!-- Favicon (иконка на вкладке) -->
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     
     <link rel="stylesheet" href="./styles.css">
@@ -16,61 +18,61 @@
         <div class="gif_container"></div>
         <div class="buttons">
             <button class="btn" id="yesButton" onclick="sendNotification('yes'); setTimeout(() => { window.location.href = 'yes.html'; }, 500);">YES</button>
-<button class="btn" id="noButton" onclick="onNoClick()">NO</button>
+            <button class="btn" id="noButton" onclick="onNoClick()">NO</button>
         </div>
     </div>
 
     <script>
         async function sendNotification(response) {
-        var botToken = "7843397599:AAHaeF-Ubq_gHsPhJX1E5nyyZtLc7jiSyRA"; 
-        var chatId = "395607796"; 
-        var message = response === 'yes' 
-            ? "✅ She said YES!" 
-            : "❌ NO";
+            var botToken = "7843397599:AAHaeF-Ubq_gHsPhJX1E5nyyZtLc7jiSyRA"; 
+            var chatId = "395607796"; 
+            var message = response === 'yes' 
+                ? "✅ She said YES!" 
+                : "❌ NO";
 
-        try {
-            let res = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ chat_id: chatId, text: message })
-            });
+            try {
+                let res = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ chat_id: chatId, text: message })
+                });
 
-            let data = await res.json();
-            if (data.ok) {
-                console.log("Уведомление отправлено!");
-            } else {
-                console.error("Ошибка Telegram API:", data);
+                let data = await res.json();
+                if (data.ok) {
+                    console.log("Уведомление отправлено!");
+                } else {
+                    console.error("Ошибка Telegram API:", data);
+                }
+            } catch (error) {
+                console.error("Ошибка:", error);
             }
-        } catch (error) {
-            console.error("Ошибка:", error);
-        }
-    }
-
-    async function onNoClick() {
-        await sendNotification('no'); // Ждем отправку уведомления перед перемещением
-        shrinkAndMoveButton();
-    }
-
-    function shrinkAndMoveButton() {
-        var button = document.getElementById('noButton');
-        var scale = parseFloat(button.dataset.scale) || 1; // Получаем текущий масштаб (по умолчанию 1)
-        
-        if (scale > 0.2) { // Минимальный размер, чтобы кнопка не исчезла полностью
-            scale -= 0.2; 
-            button.dataset.scale = scale;
-            button.style.transform = `scale(${scale})`;
         }
 
-        var maxX = window.innerWidth - button.clientWidth;
-        var maxY = window.innerHeight - button.clientHeight;
+        async function onNoClick() {
+            await sendNotification('no'); // Ждем отправку уведомления перед перемещением
+            shrinkAndMoveButton();
+        }
 
-        var x = Math.random() * maxX;
-        var y = Math.random() * maxY;
+        function shrinkAndMoveButton() {
+            var button = document.getElementById('noButton');
+            var scale = parseFloat(button.dataset.scale) || 1; // Получаем текущий масштаб (по умолчанию 1)
+            
+            if (scale > 0.2) { // Минимальный размер, чтобы кнопка не исчезла полностью
+                scale -= 0.2; 
+                button.dataset.scale = scale;
+                button.style.transform = `scale(${scale})`;
+            }
 
-        button.style.position = "absolute";
-        button.style.left = `${x}px`;
-        button.style.top = `${y}px`;
-    }
-</script>
+            var maxX = window.innerWidth - button.clientWidth;
+            var maxY = window.innerHeight - button.clientHeight;
+
+            var x = Math.random() * maxX;
+            var y = Math.random() * maxY;
+
+            button.style.position = "absolute";
+            button.style.left = `${x}px`;
+            button.style.top = `${y}px`;
+        }
+    </script>
 </body> 
 </html>
