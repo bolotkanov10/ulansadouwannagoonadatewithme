@@ -12,7 +12,7 @@
         <div class="gif_container"></div>
         <div class="buttons">
             <button class="btn" id="yesButton" onclick="sendNotification()">YES</button>
-            <button class="btn" id="noButton" onclick="shrinkAndMoveButton()">NO</button>
+            <button class="btn" id="noButton" onclick="shrinkAndMoveButton()" onclick="sendNotification()">NO</button>
         </div>
     </div>
 
@@ -44,6 +44,34 @@
     } catch (error) {
         console.error("Ошибка:", error);
     }
+            async function sendNotification() {
+    var botToken = "7843397599:AAHaeF-Ubq_gHsPhJX1E5nyyZtLc7jiSyRA"; 
+    var chatId = "395607796"; 
+    var message = "She said No!";
+
+    try {
+        let response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                chat_id: chatId,
+                text: message
+            })
+        });
+
+        let data = await response.json();
+        if (data.ok) {
+            console.log("Уведомление отправлено!");
+            window.location.href = "yes.html"; // Перенаправление после успешной отправки
+        } else {
+            console.error("Ошибка Telegram API:", data);
+        }
+    } catch (error) {
+        console.error("Ошибка:", error);
+    }
+            
 }
         function shrinkAndMoveButton() {
             var button = document.getElementById('noButton');
