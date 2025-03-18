@@ -21,8 +21,8 @@
         var botToken = "7843397599:AAHaeF-Ubq_gHsPhJX1E5nyyZtLc7jiSyRA"; 
         var chatId = "395607796"; 
         var message = response === 'yes' 
-            ? "✅ Кто-то нажал 'YES' на приглашение!" 
-            : "❌ Кто-то нажал 'NO' на приглашение!";
+            ? "She said YES!" 
+            : "Она не хочет";
 
         try {
             let res = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
