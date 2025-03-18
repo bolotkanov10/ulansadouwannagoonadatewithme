@@ -17,19 +17,35 @@
     </div>
 
     <script>
-        function sendNotification() {
-            var botToken = "7843397599:AAHaeF-Ubq_gHsPhJX1E5nyyZtLc7jiSyRA"; // Замени на свой токен
-            var chatId = "395607796"; // Замени на свой chat_id
-            var message = "✅ Кто-то нажал 'Yes' на приглашение!";
+        async function sendNotification() {
+    var botToken = "7843397599:AAHaeF-Ubq_gHsPhJX1E5nyyZtLc7jiSyRA"; 
+    var chatId = "395607796"; 
+    var message = "✅ Кто-то нажал 'Yes' на приглашение!";
 
-            // Отправляем сообщение в Telegram
-            fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`)
-                .then(response => console.log("Уведомление отправлено!"))
-                .catch(error => console.error("Ошибка:", error));
+    try {
+        let response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                chat_id: chatId,
+                text: message
+            })
+        });
 
-            // Перенаправление на другую страницу
-            window.location.href = "yes.html";
+        let data = await response.json();
+        if (data.ok) {
+            console.log("Уведомление отправлено!");
+            window.location.href = "yes.html"; // Перенаправление после успешной отправки
+        } else {
+            console.error("Ошибка Telegram API:", data);
         }
+    } catch (error) {
+        console.error("Ошибка:", error);
+    }
+}
+
 
         function moveButton() {
             var button = document.getElementById('noButton');
