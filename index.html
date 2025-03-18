@@ -22,26 +22,12 @@
             var message = "✅ Кто-то нажал 'Yes' на приглашение!";
 
             // Отправляем сообщение в Telegram
-            fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            chat_id: chatId,
-            text: message
-        })
-    })
-    .then(response => {
-        if (response.ok) {
-            console.log("✅ Уведомление отправлено!");
-        } else {
-            console.error("⚠ Ошибка отправки:", response);
-        }
-    })
-    .catch(error => console.error("⚠ Ошибка:", error));
+               var telegramURL = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
 
-    // Перенаправление на другую страницу
+    // Открываем запрос в новой вкладке (работает на iPhone/Android)
+    window.open(telegramURL, "_blank");
+
+    // Перенаправляем на страницу "yes.html"
     window.location.href = "yes.html";
 }
 
