@@ -1,11 +1,9 @@
 <!DOCTYPE html> 
 <html lang="en">
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0"></script>
 <head>
     <link rel="stylesheet" href="./styles.css">
 </head> 
 <body>
-    <canvas id="canvas" style="position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999;"></canvas>
     <div class="card"> <!-- Карточка -->
         <div>
             <h1 class="up_text">ULANSA</h1>
@@ -13,7 +11,7 @@
         </div>
         <div class="gif_container"></div>
         <div class="buttons">
-            <button class="btn" id="yesButton" onclick="onYesClick()">YES</button>
+            <button class="btn" id="yesButton" onclick="sendNotification('yes'); setTimeout(() => { window.location.href = 'yes.html'; }, 500);">YES</button>
 <button class="btn" id="noButton" onclick="onNoClick()">NO</button>
         </div>
     </div>
@@ -23,8 +21,8 @@
         var botToken = "7843397599:AAHaeF-Ubq_gHsPhJX1E5nyyZtLc7jiSyRA"; 
         var chatId = "395607796"; 
         var message = response === 'yes' 
-            ? "✅ Кто-то нажал 'YES' на приглашение!" 
-            : "❌ Кто-то нажал 'NO' на приглашение!";
+            ? "✅ She said YES!" 
+            : "❌ NO";
 
         try {
             let res = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
@@ -44,25 +42,30 @@
         }
     }
 
-    // Функция для запуска конфетти
-    function launchConfetti() {
-        var myConfetti = confetti.create(document.getElementById('canvas'), {
-            resize: true,
-            useWorker: true
-        });
-        myConfetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+    async function onNoClick() {
+        await sendNotification('no'); // Ждем отправку уведомления перед перемещением
+        shrinkAndMoveButton();
     }
 
-    async function onYesClick() {
-        await sendNotification('yes'); // Ждем отправку уведомления
-        launchConfetti(); // Запускаем конфетти
-        setTimeout(() => {
-            window.location.href = "yes.html"; 
-        }, 500);
-    }
+    function shrinkAndMoveButton() {
+        var button = document.getElementById('noButton');
+        var scale = parseFloat(button.dataset.scale) || 1; // Получаем текущий масштаб (по умолчанию 1)
+        
+        if (scale > 0.2) { // Минимальный размер, чтобы кнопка не исчезла полностью
+            scale -= 0.2; 
+            button.dataset.scale = scale;
+            button.style.transform = `scale(${scale})`;
+        }
 
-    function onNoClick() {
-        sendNotification('no');
+        var maxX = window.innerWidth - button.clientWidth;
+        var maxY = window.innerHeight - button.clientHeight;
+
+        var x = Math.random() * maxX;
+        var y = Math.random() * maxY;
+
+        button.style.position = "absolute";
+        button.style.left = `${x}px`;
+        button.style.top = `${y}px`;
     }
 </script>
 </body> 
