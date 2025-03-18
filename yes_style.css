@@ -1,0 +1,32 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #244b86;
+}
+
+
+.card {
+    background: #e7e7e7;
+    padding: 30px;
+    border-radius: 60px; /* Закругленные углы */
+    width: 500px;
+    height: 300px;
+}
+
+.header_text {
+    font-family: 'Inter';
+    font-size: 50px;
+    font-weight: bold;
+    color: #244b86;
+    text-align: center;
+    margin-top: 110px;
+    margin-bottom: 0px;
+}
+
+.gif_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

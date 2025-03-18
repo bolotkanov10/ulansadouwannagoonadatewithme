@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="./styles.css">
+</head> 
+<body>
+    <div class="card"> <!-- Карточка -->
+        <div>
+            <h1 class="header_text">DO YOU WANNA GO ON A DATE WITH ME?</h1>
+        </div>
+        <div class="gif_container"></div>
+        <div class="buttons">
+            <button class="btn" id="yesButton" onclick="sendNotification()">Yes</button>
+            <button class="btn" id="noButton" onmouseover="moveButton()" onclick="moveButton()">No</button>
+        </div>
+    </div>
+
+    <script>
+        function sendNotification() {
+            var botToken = "7843397599:AAHaeF-Ubq_gHsPhJX1E5nyyZtLc7jiSyRA"; // Замени на свой токен
+            var chatId = "395607796"; // Замени на свой chat_id
+            var message = "✅ Кто-то нажал 'Yes' на приглашение!";
+
+            // Отправляем сообщение в Telegram
+            fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`)
+                .then(response => console.log("Уведомление отправлено!"))
+                .catch(error => console.error("Ошибка:", error));
+
+            // Перенаправление на другую страницу
+            window.location.href = "yes.html";
+        }
+
+        function moveButton() {
+            var button = document.getElementById('noButton');
+            var maxX = window.innerWidth * 0.6; // Ограничиваем перемещение по ширине
+            var maxY = window.innerHeight * 0.6; // Ограничиваем перемещение по высоте
+
+            var x = Math.random() * maxX;
+            var y = Math.random() * maxY;
+
+            button.style.position = "absolute";
+            button.style.left = `${x}px`;
+            button.style.top = `${y}px`;
+        }
+    </script>
+</body> 
+</html>
