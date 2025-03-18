@@ -1,41 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <link rel="stylesheet" href="./yes_style.css">
-    <!-- Подключаем библиотеку для конфетти -->
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0"></script>
-</head>
-<body>
-    <div class="card"> <!-- Карточка -->
-        <div>
-            <h1 class="header_text">YAY! 🎉</h1>
-            <h1 class="buttom_text">TEXT ME SO I CAN PLAN OUR DATE!</h1>
-        </div>
-    </div>
-
-    <!-- Элемент Canvas для конфетти -->
-    <canvas id="canvas" style="position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999;"></canvas>
-
-    <script>
-        // Функция для запуска конфетти
-        function launchConfetti() {
-            const canvas = document.getElementById('canvas');
-            const myConfetti = confetti.create(canvas, {
-                resize: true,
-                useWorker: true
-            });
+    <head>
+        <link rel="stylesheet" href="./yes_style.css">
+        
+    </head> 
+    <body>
+        <div class="card"> <!-- Карточка -->
+            <div >
+                <h1 class = "header_text">YAY! 🎉</h1>
+                <h1 class = "buttom_text">TEXT ME SO I CAN PLAN OUR DATE!</h1>
+            </div>
             
-            myConfetti({
-                particleCount: 200, // Количество конфетти
-                spread: 70, // Угол разлета
-                origin: { x: 0.5, y: 0.2 } // Центр экрана (вверх)
-            });
-        }
-
-        // Запуск конфетти при загрузке страницы
-        window.onload = function() {
-            launchConfetti();
-        };
-    </script>
-</body> 
+            </div>
+        </div>
+       
+    </body> 
 </html>
