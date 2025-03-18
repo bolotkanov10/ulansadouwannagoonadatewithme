@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="./styles.css">
-</head> 
+</head>
 <body>
-    <div class="card"> <!-- Карточка -->
+    <div class="card">
         <div>
             <h1 class="up_text">ULANSA</h1>
             <h1 class="header_text">ID LIKE TO ASK U OUT ON A DATE. WOULD U SAY YES?</h1>
@@ -12,43 +12,31 @@
         <div class="gif_container"></div>
         <div class="buttons">
             <button class="btn" id="yesButton" onclick="sendNotification()">YES</button>
-            <button class="btn" id="noButton" onmouseover="moveButton()" onclick="shrinkAndMoveButton()">NO</button>
+            <button class="btn" id="noButton" onmouseover="moveButton()" onclick="moveButton()">NO</button>
         </div>
     </div>
 
     <script>
         function sendNotification() {
-            var botToken = "7843397599:AAHaeF-Ubq_gHsPhJX1E5nyyZtLc7jiSyRA"; // Замени на свой токен
-            var chatId = "395607796"; // Замени на свой chat_id
-            var message = "✅ Кто-то нажал 'Yes' на приглашение!";
-
-            // Отправляем сообщение в Telegram
-              fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`)
-                .then(response => console.log("Уведомление отправлено!"))
-                .catch(error => console.error("Ошибка:", error));
-
-            // Перенаправление на другую страницу
-            window.location.href = "yes.html";
+            fetch('http://localhost:3000/sendNotification', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ message: "✅ Кто-то нажал 'Yes' на приглашение!" })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log("Уведомление отправлено:", data);
+                window.location.href = "yes.html"; // Переход на страницу yes.html
+            })
+            .catch(error => {
+                console.error("Ошибка:", error);
+            });
         }
 
         function moveButton() {
             var button = document.getElementById('noButton');
-            var maxX = window.innerWidth * 0.6; // Ограничиваем перемещение по ширине
-            var maxY = window.innerHeight * 0.6; // Ограничиваем перемещение по высоте
-
-            var x = Math.random() * maxX;
-            var y = Math.random() * maxY;
-
-            button.style.position = "absolute";
-            button.style.left = `${x}px`;
-            button.style.top = `${y}px`;
-        }
-
-        function shrinkAndMoveButton() {
-            var button = document.getElementById('noButton');
-            var scale = 0.5; // Уменьшаем кнопку до 50% от исходного размера
-
-            // Двигаем кнопку
             var maxX = window.innerWidth * 0.6;
             var maxY = window.innerHeight * 0.6;
 
@@ -58,10 +46,7 @@
             button.style.position = "absolute";
             button.style.left = `${x}px`;
             button.style.top = `${y}px`;
-
-            // Уменьшаем кнопку
-            button.style.transform = `scale(${scale})`;
         }
     </script>
-</body> 
+</body>
 </html>
