@@ -19,7 +19,23 @@
     <script>
         // Функция для запуска конфетти
         function launchConfetti() {
-            var myConfetti = confetti.create(document.getElementById('canvas'), {
+            const canvas = document.getElementById('canvas');
+            const myConfetti = confetti.create(canvas, {
                 resize: true,
                 useWorker: true
             });
+            
+            myConfetti({
+                particleCount: 200,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
+        }
+
+        // Запуск конфетти при загрузке страницы
+        window.onload = function() {
+            launchConfetti();
+        };
+    </script>
+</body> 
+</html>
