@@ -4,6 +4,7 @@ body {
     align-items: center;
     height: 100vh;
     background-color: #244b86;
+    font-family: Arial, sans-serif;
 }
 
 
@@ -16,9 +17,7 @@ body {
 }
 
 .header_text {
-    font-family: 'Inter';
     font-size: 50px;
-    font-weight: bold;
     color: #244b86;
     text-align: center;
     margin-top: 110px;
@@ -26,9 +25,7 @@ body {
 }
 
 .buttom_text {
-    font-family: 'Inter';
     font-size: 17px;
-    font-weight: bold;
     color: #244b86;
     text-align: center;
     margin-top: 110px;
