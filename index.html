@@ -12,7 +12,7 @@
         <div class="gif_container"></div>
         <div class="buttons">
             <button class="btn" id="yesButton" onclick="onYesClick()">YES</button>
-            <button class="btn" id="noButton" onclick="shrinkAndMoveButton()" onclick="onNoClick()">NO</button>
+            <button class="btn" id="noButton" onmouseover="shrinkAndMoveButton()" onclick="onNoClick()">NO</button>
         </div>
     </div>
 
@@ -46,15 +46,24 @@
         sendNotification('yes');
         setTimeout(() => {
             window.location.href = "yes.html"; 
-        }, 500); // Добавил небольшую задержку для корректной отправки сообщения
+        }, 500);
     }
 
     function onNoClick() {
         sendNotification('no');
+        shrinkAndMoveButton(); // После отправки уведомления кнопка уменьшится и сдвинется
     }
 
-    function moveButton() {
+    function shrinkAndMoveButton() {
         var button = document.getElementById('noButton');
+        var scale = parseFloat(button.dataset.scale) || 1; // Получаем текущий масштаб (по умолчанию 1)
+        
+        if (scale > 0.2) { // Минимальный размер, чтобы кнопка совсем не исчезла
+            scale -= 0.2; 
+            button.dataset.scale = scale;
+            button.style.transform = `scale(${scale})`;
+        }
+
         var maxX = window.innerWidth - button.clientWidth;
         var maxY = window.innerHeight - button.clientHeight;
 
@@ -64,26 +73,7 @@
         button.style.position = "absolute";
         button.style.left = `${x}px`;
         button.style.top = `${y}px`;
-    }          
-}
-        function shrinkAndMoveButton() {
-            var button = document.getElementById('noButton');
-            var scale = 0.5; // Уменьшаем кнопку до 50% от исходного размера
-
-            // Двигаем кнопку
-            var maxX = window.innerWidth * 0.6;
-            var maxY = window.innerHeight * 0.6;
-
-            var x = Math.random() * maxX;
-            var y = Math.random() * maxY;
-
-            button.style.position = "absolute";
-            button.style.left = `${x}px`;
-            button.style.top = `${y}px`;
-
-            // Уменьшаем кнопку
-            button.style.transform = `scale(${scale})`;
-        }
-    </script>
+    }
+</script>
 </body> 
 </html>
