@@ -1,0 +1,38 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #244b86;
+    font-family: Arial, sans-serif;
+}
+
+
+.card {
+    background: #e7e7e7;
+    padding: 30px;
+    border-radius: 60px; /* Закругленные углы */
+    width: 500px;
+    height: 300px;
+}
+
+.header_text {
+    font-size: 50px;
+    color: #244b86;
+    text-align: center;
+    margin-top: 110px;
+    margin-bottom: 0px;
+}
+
+.buttom_text {
+    font-size: 17px;
+    color: #244b86;
+    text-align: center;
+    margin-top: 110px;
+    margin-bottom: auto;
+}
+.gif_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
