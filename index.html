@@ -16,8 +16,10 @@
             <img src="your-card-image.png" alt="Your Card Image" class="card-image">
         </div>
         <div class="buttons">
-            <button class="btn" id="yesButton" onclick="sendNotification('yes'); setTimeout(() => { window.location.href = 'yes.html'; }, 500);">YES</button>
-            <button class="btn" id="noButton" onclick="onNoClick()">NO</button>
+            <!-- Картинка для YES -->
+            <img src="yes-image.png" id="yesButton" onclick="sendNotification('yes'); setTimeout(() => { window.location.href = 'yes.html'; }, 500);" style="cursor: pointer;">
+            <!-- Картинка для NO -->
+            <img src="no-image.png" id="noButton" onclick="onNoClick()" style="cursor: pointer;">
         </div>
     </div>
 
