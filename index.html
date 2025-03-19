@@ -9,6 +9,16 @@
             width: 150px; /* Установи нужную ширину кнопки */
             height: auto; /* Автоматическая высота для сохранения пропорций */
             cursor: pointer;
+            margin: 10px; /* Добавляет отступ между кнопками */
+        }
+        .buttons {
+            display: flex;
+            justify-content: center; /* Центрируем кнопки */
+            gap: 20px; /* Добавляет расстояние между кнопками */
+            margin-top: 20px; /* Опускает кнопки ниже карточки */
+        }
+        .card {
+            text-align: center;
         }
     </style>
 </head> 
@@ -16,16 +26,17 @@
     <div class="card"> <!-- Карточка с изображением -->
         <img src="your-card-image.png" alt="Invitation" class="card-image">
         <div>
+            <h1 class="up_text">ULANSA</h1>
         </div>
         <div class="gif_container"></div>
-        <div class="buttons">
-            <!-- Кнопка ДА (изображение) -->
-            <img src="yes-button.png" alt="Yes" class="btn-img" id="yesButton"
-                onclick="sendNotification('yes'); setTimeout(() => { window.location.href = 'yes.html'; }, 500);">
-            
-            <!-- Кнопка НЕТ (изображение) -->
-            <img src="no-button.png" alt="No" class="btn-img" id="noButton" onclick="onNoClick()">
-        </div>
+    </div>
+    <div class="buttons">
+        <!-- Кнопка ДА (изображение) -->
+        <img src="yes-button.png" alt="Yes" class="btn-img" id="yesButton"
+            onclick="sendNotification('yes'); setTimeout(() => { window.location.href = 'yes.html'; }, 500);">
+        
+        <!-- Кнопка НЕТ (изображение) -->
+        <img src="no-button.png" alt="No" class="btn-img" id="noButton" onclick="onNoClick()">
     </div>
 
     <script>
