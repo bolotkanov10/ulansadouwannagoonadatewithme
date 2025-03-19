@@ -1,31 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Название сайта -->
     <title>id like to ask u out on a date</title>
-
-    <!-- Favicon (иконка на вкладке) -->
     <link rel="icon" href="favicon.ico" type="image/x-icon">
-    
     <link rel="stylesheet" href="./styles.css">
 </head> 
 <body>
-    <div class="card"> <!-- Карточка -->
+    <div class="card"> <!-- Карточка с изображением -->
+        <img src="your-card-image.png" alt="Invitation" class="card-image">
         <div>
             <h1 class="up_text">ULANSA</h1>
-            <h1 class="header_text">I'D LIKE TO SHARE IFTAR WITH YOU. WOULD YOU JOIN ME FOR AN IFTAR DATE?👉👈</h1>
         </div>
         <div class="gif_container"></div>
         <div class="buttons">
-            <button class="btn" id="yesButton" onclick="sendNotification('yes'); setTimeout(() => { window.location.href = 'yes.html'; }, 500);">YES</button>
-            <button class="btn" id="noButton" onclick="onNoClick()">NO</button>
+            <!-- Кнопка ДА (изображение) -->
+            <img src="yes-button.png" alt="Yes" class="btn-img" id="yesButton"
+                onclick="sendNotification('yes'); setTimeout(() => { window.location.href = 'yes.html'; }, 500);">
+            
+            <!-- Кнопка НЕТ (изображение) -->
+            <img src="no-button.png" alt="No" class="btn-img" id="noButton" onclick="onNoClick()">
         </div>
     </div>
 
     <script>
         async function sendNotification(response) {
-            var botToken = "7843397599:AAHaeF-Ubq_gHsPhJX1E5nyyZtLc7jiSyRA"; 
-            var chatId = "395607796"; 
+            var botToken = "7843397599:AAHaeF-Ubq_gHsPhJX1E5nyyZtLc7jiSyRA";
+            var chatId = "395607796";
             var message = response === 'yes' 
                 ? "✅ She said YES!" 
                 : "❌ NO";
@@ -49,16 +49,16 @@
         }
 
         async function onNoClick() {
-            await sendNotification('no'); // Ждем отправку уведомления перед перемещением
+            await sendNotification('no');
             shrinkAndMoveButton();
         }
 
         function shrinkAndMoveButton() {
             var button = document.getElementById('noButton');
-            var scale = parseFloat(button.dataset.scale) || 1; // Получаем текущий масштаб (по умолчанию 1)
+            var scale = parseFloat(button.dataset.scale) || 1;
             
-            if (scale > 0.2) { // Минимальный размер, чтобы кнопка не исчезла полностью
-                scale -= 0.2; 
+            if (scale > 0.2) {
+                scale -= 0.2;
                 button.dataset.scale = scale;
                 button.style.transform = `scale(${scale})`;
             }
