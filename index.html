@@ -11,11 +11,10 @@
 </head> 
 <body>
     <div class="card"> <!-- Карточка -->
-        <div>
-            <h1 class="up_text">ULANSA</h1>
-            <h1 class="header_text">I'D LIKE TO SHARE IFTAR WITH YOU. WOULD YOU JOIN ME FOR AN IFTAR DATE?👉👈</h1>
+        <div class="image-container">
+            <!-- Вставлена картинка -->
+            <img src="your-card-image.png" alt="Your Card Image" class="card-image">
         </div>
-        <div class="gif_container"></div>
         <div class="buttons">
             <button class="btn" id="yesButton" onclick="sendNotification('yes'); setTimeout(() => { window.location.href = 'yes.html'; }, 500);">YES</button>
             <button class="btn" id="noButton" onclick="onNoClick()">NO</button>
