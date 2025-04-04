@@ -5,78 +5,150 @@ body {
     height: 90vh;
     background-color: #ececec;
     font-family: Arial, sans-serif;
+    margin: 0;
+}
+
+.card-container {
+    position: relative;
+    width: 410px; /* Максимальная ширина контейнера */
+    height: 250px; /* Уменьшили высоту контейнера */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .card {
-
-    padding: 30px;
-    border-radius: 60px; /* Закругленные углы */
-    width: 500px;
-    height: 300px;
-}
-
-#noButton {
     position: absolute;
-    margin-left: 150px;
-    transition: 0.5s;
-}
-
-#yesButton {
-    position: absolute;
-    margin-right: 150px;
+    width: 100%;
+    height: 100%;
+    background: #233494;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 40px; /* Уменьшили радиус скругления */
+    padding: 12px; /* Уменьшили padding */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-family: Arial, sans-serif;
+    transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out;
+    text-transform: uppercase;
 }
 
 .header_text {
-    font-size: 25px;
+    font-size: 20px; /* Уменьшили размер шрифта */
     color: white;
     text-align: center;
-    margin-top: 10px;
-    margin-bottom: 55px;
+    margin-top: 15px;
+    margin-bottom: 5px; /* Уменьшили отступ снизу */
 }
 
-.up_text {
-    font-size: 25px;
+.under_text {
+    font-size: 5px; /* В два раза меньше, чем основной текст */
     color: white;
+    position: absolute;
+    bottom: 5px;
+    width: 100%;
     text-align: center;
-    margin-top: 70px;
+}
+
+.last_text {
+    font-size: 4px; /* Еще меньше текст */
+    color: white;
+    position: absolute;
+    bottom: 3px;
+    width: 100%;
+    text-align: center;
+}
+
+.card.old {
+    transform: translateY(0) scale(1);
+    z-index: 2;
+}
+
+.card.new {
+    transform: translateY(60px) scale(0.7);
+    z-index: 1;
+    opacity: 0;
+    animation: fadeIn 1s forwards;
+    animation-delay: 0.5s;
+}
+
+.card.exit {
+    transform: translateX(-100%) scale(0.6);
+    opacity: 0;
+}
+
+.card.enter {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 
 .buttons {
+    position: absolute;
+    bottom: 10px; /* Располагаем кнопки ближе к низу */
+    width: 100%;
     display: flex;
-    flex-direction: row;
     justify-content: center;
-    align-items: center;
-    margin-top: 80px;
-    margin-left: auto;
+    gap: 10px; /* Уменьшаем расстояние между кнопками */
+    z-index: 3;
+    opacity: 0;
+    animation: buttonsFadeIn 1s forwards;
+    animation-delay: 2s;
 }
 
-.btn_no {
-    background-color: #e25656;
+.btn {
+    background-color: #446ead;
     color: white;
-    padding: 15px 32px;
+    padding: 9px 16px; /* Уменьшили padding */
     text-align: center;
     display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
+    font-size: 10px; /* Уменьшили шрифт */
     cursor: pointer;
     border: none;
-    border-radius: 12px;
+    border-radius: 8px; /* Уменьшили радиус кнопок */
     transition: background-color 0.3s ease;
+    width: 60px; /* Уменьшили ширину кнопок */
 }
 
-.btn_yes {
-    background-color: #6ecf61;
+#noButton, #yesButton {
+    padding: 9px 19px;
+    font-size: 10px;
+    border-radius: 8px;
+    background-color: #446ead;
     color: white;
-    padding: 15px 32px;
-    text-align: center;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
     border: none;
-    border-radius: 12px;
+    cursor: pointer;
     transition: background-color 0.3s ease;
+    margin-bottom: 8px;
 }
+
+#noButton {
+    background-color: #ff4d4d;
+}
+
+#yesButton {
+    background-color: #4CAF50;
+}
+
+@keyframes buttonsFadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
 .gif_container {
     display: flex;
     justify-content: center;
@@ -89,16 +161,12 @@ body {
     }
 
     .header_text {
-        font-size: 20px;
-    }
-
-    img {
-        height: 60vh;
+        font-size: 8px;
     }
 
     .btn {
-        padding: 10px 18px;
-        font-size: 12px;
+        padding: 7px 12px;
+        font-size: 8px;
     }
 }
 
@@ -108,15 +176,11 @@ body {
     }
 
     .header_text {
-        font-size: 28px;
-    }
-
-    img {
-        height: 60vh;
+        font-size: 12px;
     }
 
     .btn {
-        padding: 15px 25px;
-        font-size: 14px;
+        padding: 9px 15px;
+        font-size: 10px;
     }
 }
